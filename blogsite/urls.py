@@ -33,4 +33,4 @@ urlpatterns = [
     path('images/', include('images.urls', namespace='images')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

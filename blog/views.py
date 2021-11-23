@@ -8,7 +8,7 @@ from django.views.generic import ListView
 
 from taggit.models import Tag
 
-from . forms import EmailPostForm, CommentForm, SearchForm
+from . forms import EmailPostForm, CommentForm, NewPost, SearchForm
 from . models import Post, Comment
 
 
@@ -140,3 +140,10 @@ def post_search(request):
                    'results': results})
 
 
+def new_post(request):
+    form = NewPost()
+    results = []
+    return render(request,
+                    'blog/post/base.html',
+                    {'form' : form,
+                    'results': results})

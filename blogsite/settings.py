@@ -36,7 +36,7 @@ SECRET_KEY = get_random_secret_key()
 DEBUG = True
 
 # Determines which IP addresses and URLs can be validly hosted
-ALLOWED_HOSTS = ['asign75.azurewebsite.net','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['Final6325.azurewebsites.net','127.0.0.1','localhost']
 
 # For sites and site_maps
 SITE_ID = 1
@@ -66,6 +66,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -101,12 +102,17 @@ DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-    'default': {
+    # 
+  'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'blog',
-        'USER': 'blog',
-        'PASSWORD': 'asdfghjkl',
+        'USER': 'blog@blog6325',
+        'PASSWORD': 'ASDFghjk1',
+        'HOST': 'blog6325.postgres.database.azure.com',
+        'PORT': '5432',
+        'OPTIONS' : {
+            'sslmode': 'require',
+        },
     }
 }
 
@@ -147,19 +153,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = os.path.join(BASE_DIR, '/static/')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '/static/'),
+    ]   
+#STATIC_ROOT = STATIC_URL
 
-
+SESSION_ID = "test" 
 # Email settings - https://docs.djangoproject.com/en/3.0/topics/email/
 
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+#EMAIL_HOST = os.getenv('EMAIL_HOST')
+#EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+#EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
 
 # if you can't use an SMTP server, then use EMAIL_BACKEND
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
@@ -196,3 +208,4 @@ ABSOLUTE_URL_OVERRIDES = {
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 0
+

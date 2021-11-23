@@ -76,3 +76,6 @@ class Comment(models.Model):
         # more about python f strings: https://www.pydanny.com/python-f-strings-are-fun.html
         return f'Comment by {self.name} on {self.post}'
 
+    # this is how you create an enum in Python
+
+    
